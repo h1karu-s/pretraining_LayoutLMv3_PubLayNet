@@ -1,0 +1,8 @@
+start!
+create vocab 0.12997698783874512
+get file_name
+start! extraction words and bboxes from pdf. 0.6707682609558105
+finish! extraction words and bboxes from pdf.  1380.5773587226868
+start! tokenize
+3336 PMC4045519_00002
+5286 PMC4329830_00000

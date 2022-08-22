@@ -1,0 +1,24 @@
+start!
+create vocab
+get file_name
+start! extraction words and bboxes from pdf.
+finish! extraction words and bboxes from pdf. 
+start! tokenize
+Traceback (most recent call last):
+  File "create_dataset.py", line 41, in <module>
+    enc = enc = tokenizer(text=words, boxes = bboxes, add_special_tokens=False)
+  File "/home/is/hikaru-si/.pyenv/versions/exp_004/lib/python3.8/site-packages/transformers/models/layoutlmv3/tokenization_layoutlmv3.py", line 652, in __call__
+    return self.batch_encode_plus(
+  File "/home/is/hikaru-si/.pyenv/versions/exp_004/lib/python3.8/site-packages/transformers/models/layoutlmv3/tokenization_layoutlmv3.py", line 735, in batch_encode_plus
+    return self._batch_encode_plus(
+  File "/home/is/hikaru-si/.pyenv/versions/exp_004/lib/python3.8/site-packages/transformers/models/layoutlmv3/tokenization_layoutlmv3.py", line 792, in _batch_encode_plus
+    batch_outputs = self._batch_prepare_for_model(
+  File "/home/is/hikaru-si/.pyenv/versions/exp_004/lib/python3.8/site-packages/transformers/models/layoutlmv3/tokenization_layoutlmv3.py", line 848, in _batch_prepare_for_model
+    outputs = self.prepare_for_model(
+  File "/home/is/hikaru-si/.pyenv/versions/exp_004/lib/python3.8/site-packages/transformers/models/layoutlmv3/tokenization_layoutlmv3.py", line 1120, in prepare_for_model
+    word_tokens = self.tokenize(word)
+  File "/home/is/hikaru-si/.pyenv/versions/exp_004/lib/python3.8/site-packages/transformers/tokenization_utils.py", line 547, in tokenize
+    tokenized_text.extend(self._tokenize(token))
+  File "/home/is/hikaru-si/.pyenv/versions/exp_004/lib/python3.8/site-packages/transformers/models/layoutlmv3/tokenization_layoutlmv3.py", line 405, in _tokenize
+    self.byte_encoder[b] for b in token.encode("utf-8")
+UnicodeEncodeError: 'utf-8' codec can't encode characters in position 1-12: surrogates not allowed
