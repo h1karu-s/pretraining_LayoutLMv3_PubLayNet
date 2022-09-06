@@ -29,7 +29,7 @@ PDFからiamge(png)を生成
 
 ・MIMのみ作成
 
-## Do
+## Done
 ・元コードのLayoutLMv3はfine tuning用に書かれたものなので、事前学習用にMasked language model(MLM)を作成<br/>
 ・LayoutLMv3は[span mask](https://aclanthology.org/2020.tacl-1.5/)を使用<br/>
 ・↑実装コードがなかったため自分で実装 (src/utils/utils.py)<br/>
