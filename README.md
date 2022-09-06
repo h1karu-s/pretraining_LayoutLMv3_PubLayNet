@@ -1,5 +1,5 @@
 
-PubLayNet:
+PubLayNet:<br/>
 https://github.com/ibm-aur-nlp/PubLayNet
 上記URLからPDFのデータセットをダウンロード
 
