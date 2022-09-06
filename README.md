@@ -1,6 +1,6 @@
 
 PubLayNet:<br/>
-https://github.com/ibm-aur-nlp/PubLayNet
+https://github.com/ibm-aur-nlp/PubLayNet<br/>
 上記URLからPDFのデータセットをダウンロード
 
 PDFからiamge(png)を生成
