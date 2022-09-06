@@ -1,0 +1,11 @@
+*.cpt
+output_log
+__pycache__
+data/vocab/
+data/preprocessing_shared
+/notebook/free_space.ipynb
+/src/utils/slack.py
+
+
+
+

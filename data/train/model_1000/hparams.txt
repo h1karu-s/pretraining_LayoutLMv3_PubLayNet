@@ -1,0 +1,1 @@
+{'tokenizer_vocab_dir': './data/vocab/tokenizer_vocab/', 'input_file': './data/preprocessing_shared/encoded_dataset_1000.pkl', 'model_params': None, 'output_model_dir': './data/train/model_1000/', 'output_file_name': 'pretrained_layoutLMv3_1.params', 'model_name': 'microsoft/layoutlmv3-base', 'ratio_train': 0.9, 'batch_size': 8, 'learning_rate': 1e-05, 'max_epochs': 5}
