@@ -1,5 +1,7 @@
 # pretraing_LayoutLMv3_PubLayNet
 
+##利用方法
+###Download dataset
 PubLayNet:<br/>
 https://github.com/ibm-aur-nlp/PubLayNet<br/>
 上記URLからPDFのデータセットをダウンロード
