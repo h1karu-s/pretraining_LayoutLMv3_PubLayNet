@@ -27,7 +27,6 @@ PDFからiamge(png)を生成
  sh ./script/pretrain.sh
 ```
 
-・MIMのみ作成
 
 ## Done
 ・元コードのLayoutLMv3はfine tuning用に書かれたものなので、事前学習用にMasked language model(MLM)を作成<br/>
