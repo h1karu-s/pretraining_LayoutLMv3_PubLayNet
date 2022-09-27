@@ -5,6 +5,5 @@ python ./src/preprocessing.py \
     --image_file_dir ../datasets/pdfs/images/train/ \
     --pdf_file_dir ../datasets/pdfs/train/ \
     --output_dir ./data/preprocessing_shared/ \
-    --output_filename encoded_dataset_1000.pkl \
-    --n_train 1000
-    --n_valid 10
+    --output_filename encoded_dataset.pkl \
+    --datasize 50000

@@ -7,6 +7,7 @@ import fitz
 
 
 def main(args):
+    print(args, flush=True)
     file_names = []
     pdf_names = os.listdir(args.input_dir)
     for n in pdf_names:

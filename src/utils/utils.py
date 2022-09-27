@@ -1,13 +1,28 @@
 
 import collections
 
+import sys
 import fitz
 import numpy as np
 import itertools
 import numpy as np
 import torch
-from torch.utils.data import DataLoader
 
+##debag
+import requests
+
+TOKEN = "xoxb-4034955631811-4035078754066-Hc3p7yqYsWNWN6VpGls28DMD"
+CHANNEL = "general"
+url = "https://slack.com/api/chat.postMessage"
+headers = {"Authorization": "Bearer "+TOKEN}
+
+def notification_slack(mes):
+    data = {
+      "channel": CHANNEL,
+      "text": mes
+    }
+    requests.post(url, headers=headers, data=data)
+###########
 
 #create vocab list
 # tokenizer = LayoutLMv3Tokenizer("../model/tokenizer_vocab/vocab.json", "../model/tokenizer_vocab/merges.txt")
@@ -27,8 +42,8 @@ def extraction_text_from_pdf(file_path, file_names):
         doc = fitz.open(f"{file_path}{file_name}.pdf")
         for page in doc:
             data = page.get_text("words")
-            width = page.mediabox[2]
-            height = page.mediabox[3]
+            width = page.rect.width
+            height = page.rect.height
             for d in data:
                 words[i].append(d[4].lower())
                 bbox = normalize_bbox(list(d[0:4]), [width, height])
@@ -118,7 +133,7 @@ def subset_tokens_from_document(tokens_list, bboxes_list, pixel_values, vocab,  
 #bpe baseではなく word base
 def create_span_mask_for_ids(token_ids, masked_lm_prob, max_predictions_per_seq, vocab_words, param , rng):
     cand_indexes = []
-    for (i, id) in enumerate(token_ids):
+    for i, id in enumerate(token_ids):
         if id == vocab_words.index("<s>") or id == vocab_words.index("</s>") or id == vocab_words.index("<pad>"):
             continue
 
@@ -130,6 +145,7 @@ def create_span_mask_for_ids(token_ids, masked_lm_prob, max_predictions_per_seq,
     #全単語×0.3(masked_lm_prob)がmaskの対象
     num_to_predict = min(max_predictions_per_seq, 
                       max(1, int(round(len(cand_indexes) * masked_lm_prob))))
+    
 
     span_count = 0
     covered_indexes = [] #mask候補のリスト
@@ -142,7 +158,8 @@ def create_span_mask_for_ids(token_ids, masked_lm_prob, max_predictions_per_seq,
             continue
         #cand_indexesから初めの単語を決める
         if len(cand_indexes) -(1 + span_length) <= 0:
-             break
+            break
+            # continue
         start_index = rng.randint(0, len(cand_indexes)-(1 + span_length))
         #span_lengthからsubword単位のspanの範囲を決める
         covered_index = cand_indexes[start_index: start_index +span_length]
@@ -181,6 +198,11 @@ def create_span_mask_for_ids(token_ids, masked_lm_prob, max_predictions_per_seq,
     for p in masked_lms:
         masked_lm_positions.append(p.index)
         masked_lm_labels.append(p.label)
+    
+    #debag
+    # if len(token_ids) > 300 and len(masked_lm_positions) < 2:
+    #     print(f"error!!! token length: {len(token_ids)}, postions : {masked_lm_positions}, num_to_predict:{num_to_predict}, span_coont:{span_count},covered_indexes:{covered_indexes}, cand_index:{len(cand_indexes)} coverd_indexes_lenght:{len(covered_indexes)}", flush=True)
+
 
     return (output_tokens, masked_lm_positions, masked_lm_labels)
 
@@ -261,3 +283,46 @@ def subset_tokens_from_document_light(tokens_list, bboxes_list, vocab,  max_len 
             add_list(subset_tokens, subset_bboxes, doc_id)
     return (subset_tokens_list, subset_bboxes_list, document_ids)
 
+def init_visual_bbox(img_size=(14, 14), max_len=1000):
+    #torch div : divide
+    visual_bbox_x = torch.div(torch.arange(0, max_len * (img_size[1] + 1), max_len),
+                            img_size[1], rounding_mode='trunc')
+    visual_bbox_y = torch.div(torch.arange(0, max_len * (img_size[0] + 1), max_len),
+                            img_size[0], rounding_mode='trunc')
+    visual_bbox = torch.stack(
+        [
+            visual_bbox_x[:-1].repeat(img_size[0], 1),
+            visual_bbox_y[:-1].repeat(img_size[1], 1).transpose(0, 1),
+            visual_bbox_x[1:].repeat(img_size[0], 1),
+            visual_bbox_y[1:].repeat(img_size[1], 1).transpose(0, 1),
+        ],
+        dim=-1,
+    ).view(-1, 4)
+    return visual_bbox
+
+#対応する画像がmaskされている 0 False, maskされていない: 1 True
+def create_alignment_label(visual_bbox, text_bbox, bool_mi_pos):
+    num_text = len(text_bbox)
+    labels = torch.ones(num_text)
+    for v_b in visual_bbox[bool_mi_pos]:
+        for j, t_b in enumerate(text_bbox):
+            if is_content_bbox(t_b, v_b) or is_content_bbox_2(t_b, v_b):
+                labels[j] = 0
+    alignment_label = labels.to(torch.bool)
+    return alignment_label
+
+# (x0, y0, x1, y1) x0, y0比較
+def is_content_bbox(text_bbox, image_bbox):
+    if (text_bbox[0] >= image_bbox[0] and text_bbox[1] >= image_bbox[1] 
+    and text_bbox[0] <= image_bbox[2] and text_bbox[1] <= image_bbox[3]):
+        return True
+    else:
+        return False
+    
+# (x0, y0, x1, y1) x1, y1比較
+def is_content_bbox_2(text_bbox, image_bbox):
+    if (text_bbox[2] >= image_bbox[0] and text_bbox[3] >= image_bbox[1] 
+    and text_bbox[2] <= image_bbox[2] and text_bbox[3] <= image_bbox[3]):
+        return True
+    else:
+        return False

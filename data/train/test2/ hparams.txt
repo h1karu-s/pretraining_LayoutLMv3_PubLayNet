@@ -1,0 +1,1 @@
+{'tokenizer_vocab_dir': '../data/vocab/tokenizer_vocab/', 'input_file': '../data/preprocessing_shared/wpa_10000/', 'model_params': None, 'ratio_train': 0.9, 'output_model_dir': '../data/train/test2/ ', 'output_file_name': 'model.param', 'model_name': 'microsoft/layoutlmv3-base', 'batch_size': 32, 'learning_rate': 0.0001, 'max_epochs': 3, 'datasize': 2}

@@ -1,3 +1,3 @@
-python ./src/pdf2image.py \
-    --input_dir ../datasets/pdfs/train/ \
-    --output_dir ../datasets/pdfs/images/train/ \
+python3 ./src/pdf2image.py \
+    --input_dir ../datasets/pdfs/dev/ \
+    --output_dir ../datasets/pdfs/images/dev/ 

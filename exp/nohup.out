@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "load_bigfile.py", line 7, in <module>
+    data = pickle.load(f)
+_pickle.UnpicklingError: pickle data was truncated
+23274
+58.300528049468994
