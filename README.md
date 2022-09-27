@@ -34,8 +34,10 @@ PDFからiamge(png)を生成
 ・LayoutLMv3は[span mask](https://aclanthology.org/2020.tacl-1.5/)を使用<br/>
 ・↑実装コードがなかったため自分で実装 (src/utils/utils.py)<br/>
 ・論文の文字数は長いため512で切り捨てずに512ごとに分割(src/utils/utils.py)<br/>
-
-## To Do
 ・Masked image model(MIM)の実装<br/>
 ・Word-Patch Alignment (WPA)の実装<br/>
+
+## To Do
+・
+・
 
