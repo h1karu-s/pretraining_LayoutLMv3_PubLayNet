@@ -21,7 +21,7 @@ PDFからiamge(png)を生成
 ```
  sh ./script/preprocessing.sh
 ```
-### 4. train (src/pretrain_2.py)
+### 4. train (src/pretrain_3.py)
 学習
 ```
  sh ./script/pretrain.sh
