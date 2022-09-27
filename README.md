@@ -38,7 +38,8 @@ PDFからiamge(png)を生成
 ・Word-Patch Alignment (WPA)の実装<br/>
 
 ## error
-・src/pretrain_3.py
+・src/pretrain_3.py<br/>
+実行場所 /cr/work2/hikaru-si/development/exp_005/
 ```
 ・Traceback (most recent call last):
   File "./src/pretrain_3.py", line 360, in <module>
