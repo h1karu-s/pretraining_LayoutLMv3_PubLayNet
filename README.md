@@ -16,7 +16,7 @@ https://github.com/ibm-aur-nlp/PubLayNet<br/>
 上記URLからPDFのデータセットをダウンロード
 
 ### 1. create image(src/pdf2image.py)
-PDFからiamge(png)を生成
+PDFからimage(.png)を生成
 ```
  sh ./scirpt/pdf2image.sh
  ```
@@ -30,7 +30,7 @@ PDFからiamge(png)を生成
 ```
  sh ./script/preprocessing.sh
 ```
-### 4. train (src/pretrain_3.py)
+### 4. pretrain (src/pretrain_3.py)
 学習
 ```
  sh ./script/pretrain.sh
