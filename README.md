@@ -1,5 +1,9 @@
 # pretraing_LayoutLMv3_PubLayNet
 
+### 概要
+LayoutLMv3をPubLayNetデータセットの科学論文を使用して、事前学習を行う。
+
+
 ## 利用方法
 ### 0. Download dataset
 PubLayNet:<br/>
