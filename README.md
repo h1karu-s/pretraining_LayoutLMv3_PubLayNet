@@ -1,9 +1,12 @@
 # pretraing_LayoutLMv3_PubLayNet
 
-### Abstract
+## Abstract
 This code is "pretraining LayoutLMv3 in scientific papers".<br/>
 Original LayoutLMv3 repo don't give implementation of pretraining.<br/>
-so I created pretrain code.<br/>
+so I created pretrain code.<br/><br/>
+
+original repo: https://github.com/microsoft/unilm/tree/master/layoutlmv3<br/>
+paper: https://arxiv.org/abs/2204.08387
 
 
 ## 利用方法
