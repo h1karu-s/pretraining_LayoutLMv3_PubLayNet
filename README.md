@@ -1,9 +1,9 @@
 # pretraing_LayoutLMv3_PubLayNet
 
 ### 概要
-This code is "pretraining LayoutLMv3 in scientific papers".
-Original LayoutLMv3 repo don't give implementation of pretraining.
-so I created pretrain code.
+This code is "pretraining LayoutLMv3 in scientific papers".<br/>
+Original LayoutLMv3 repo don't give implementation of pretraining.<br/>
+so I created pretrain code.<br/>
 
 
 ## 利用方法
