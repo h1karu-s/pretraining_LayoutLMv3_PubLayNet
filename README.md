@@ -1,7 +1,9 @@
 # pretraing_LayoutLMv3_PubLayNet
 
 ### 概要
-LayoutLMv3をPubLayNetデータセットの科学論文を使用して、事前学習を行う。
+This code is "pretraining LayoutLMv3 in scientific papers".
+Original LayoutLMv3 repo don't give implementation of pretraining.
+so I created pretrain code.
 
 
 ## 利用方法
